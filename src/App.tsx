@@ -1,4 +1,4 @@
-import { Button } from './components/ui/button'
+import { Button } from './components/ui/button';
 import './global.css'
 
 export function App() {
@@ -8,4 +8,6 @@ export function App() {
       <Button>Enviar</Button>
     </div>
   )
-}
+}; 
+
+
