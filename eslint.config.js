@@ -14,10 +14,11 @@ export default [
       'simple-import-sort/imports': 'error',
       //'simple-import-sort/exports': 'error',
       semi: ['error', 'never'],
-      quotes: ['error', 'single']
+      quotes: ['error', 'single'],
+      '@typescript-eslint/no-unused-vars': [ 'error', false ]
     },
   },
   {languageOptions: { globals: globals.node }},
   pluginJs.configs.recommended,
-  ...tseslint.configs.recommended 
+  ...tseslint.configs.recommended
 ]
