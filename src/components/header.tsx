@@ -5,7 +5,7 @@ import { NavLink } from './nav-link'
 import { ThemeToggle } from './theme/theme-toggle'
 import { AccountMenu } from './account-menu'
 
-export function Header() { //flex  items-center gap-6
+export function Header() {
   return (
     <div className='border-b'>
       <div className="flex flex-col items-center gap-6 py-6 px-6 md:flex-row">
