@@ -3,6 +3,7 @@ import { MonthRevenueCard } from './month-revenue-card'
 import { MonthOrdersAmountCard } from './month-orders-amount-card'
 import { DayOrdersAmountCard } from './day-orders-amount-card'
 import { MonthCanceledOrdersAmountCard } from './month-canceled-orders-amount-card'
+import { RevenueChart } from '@/components/revenue-chart'
 
 export function Dashboard() {
   return (
@@ -20,6 +21,10 @@ export function Dashboard() {
             <DayOrdersAmountCard />
             <MonthCanceledOrdersAmountCard />
           </div>
+        </div>
+
+        <div className='flex flex-col md:flex-row gap-4 flex-1'>
+          <RevenueChart />
         </div>
       </div>
     </>
