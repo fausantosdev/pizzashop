@@ -38,7 +38,7 @@ export function RevenueChart() {
     <Card className='flex-1'>
       <CardHeader className='flex-row items-center justify-between pb-8'>
         <div className='space-y-1'>
-          <CardTitle className='text-base font-medium'>Receiat no período</CardTitle>
+          <CardTitle className='text-base font-medium'>Receita no período</CardTitle>
           <CardDescription>Receita diária no período</CardDescription>
         </div>
       </CardHeader>
@@ -58,6 +58,9 @@ export function RevenueChart() {
               //axisLine={false}
               //tickLine={false}
               dy={16}/>
+            <CartesianGrid
+              vertical={false}
+              className='stroke-muted'/>
             <Line
               type='linear'
               dataKey='revenue'
