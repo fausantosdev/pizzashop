@@ -16,15 +16,24 @@ type SignInFormTypes = z.infer<typeof signInFormSchema>
 export function SignIn() {
   const { register, handleSubmit, formState: { isSubmitting } } = useForm<SignInFormTypes>()
 
-  function handleSignIn(data: SignInFormTypes) {
-    console.log(data)
+  async function handleSignIn({ email }: SignInFormTypes) {
+    try {
 
-    toast.success('Enviamos um link de autenticação para seu e-mail', {
-      action: {
-        label: 'Reenviar',
-        onClick: () => handleSignIn(data)
-      }
-    })
+      toast.success('Enviamos um link de autenticação para seu e-mail', {
+        action: {
+          label: 'Reenviar',
+          onClick: () => handleSignIn({ email })
+        }
+      })
+    } catch (error) {
+      toast.error('Erro ao autenticar, tente novamente', {
+        action: {
+          label: 'Reenviar',
+          onClick: () => handleSignIn({ email })
+        }
+      })
+      return
+    }
   }
 
   return (

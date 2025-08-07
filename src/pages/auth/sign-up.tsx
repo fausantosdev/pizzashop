@@ -23,12 +23,18 @@ export function SignUp() {
   function handleSignIn(data: SignInFormTypes) {
     console.log(data)
 
-    toast.success('Restaurante cadastrado com sucesso', {
-      action: {
-        label: 'Login',
-        onClick: () => navigate('/sign-in')
-      }
-    })
+    try {
+
+      toast.success('Restaurante cadastrado com sucesso', {
+        action: {
+          label: 'Login',
+          onClick: () => navigate('/sign-in')
+        }
+      })
+    } catch (error) {
+      toast.error('Erro ao se cadastrar, por favor tente novamente')
+      return
+    }
   }
 
   return (
@@ -62,7 +68,7 @@ export function SignUp() {
               <label htmlFor='managerName'>Seu nome</label>
               <Input
                 id='managerName'
-                type='email'
+                type='text'
                 {...register('managerName')}/>
             </div>
             <div className='space-y-2'>
