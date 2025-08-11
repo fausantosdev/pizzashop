@@ -3,9 +3,11 @@ import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { toast } from 'sonner'
 import { Link, useNavigate } from 'react-router-dom'
+import { useMutation } from '@tanstack/react-query'
 
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
+import { registerRestaurant } from '@/api/register-restaurant'
 
 const signUpFormSchema = z.object({
   restaurantName: z.string(),
@@ -18,17 +20,33 @@ type SignInFormTypes = z.infer<typeof signUpFormSchema>
 
 export function SignUp() {
   const navigate = useNavigate()
-  const { register, handleSubmit, formState: { isSubmitting } } = useForm<SignInFormTypes>()
 
-  function handleSignIn(data: SignInFormTypes) {
-    console.log(data)
+  const {
+    register,
+    handleSubmit,
+    formState: {
+      isSubmitting
+    }
+  } = useForm<SignInFormTypes>()
+
+  const { mutateAsync: authRegister } = useMutation({
+    mutationFn: registerRestaurant
+  })
+
+  async function handleSignUp(data: SignInFormTypes) {
+    await authRegister({
+      restaurantName: data.restaurantName,
+      managerName: data.managerName,
+      email: data.email,
+      phone: data.phone
+    })
 
     try {
 
       toast.success('Restaurante cadastrado com sucesso', {
         action: {
           label: 'Login',
-          onClick: () => navigate('/sign-in')
+          onClick: () => navigate(`/sign-in?email=${data.email}`)
         }
       })
     } catch (error) {
@@ -56,7 +74,7 @@ export function SignUp() {
           </div>
           <form
             className='space-y-4'
-            onSubmit={handleSubmit(handleSignIn)}>
+            onSubmit={handleSubmit(handleSignUp)}>
             <div className='space-y-2'>
               <label htmlFor='restaurantName'>Nome do estabelecimento</label>
               <Input
