@@ -12,14 +12,15 @@ import { Button } from './ui/button'
 
 import { getProfile } from '@/api/get-profile'
 import { getManagedRestaurant } from '@/api/get-managed-restaurant'
+import { Skeleton } from './ui/skeleton'
 
 export function AccountMenu() {
-  const { data: profileData } = useQuery({
+  const { data: profileData, isLoading: isLoading_ProfileData } = useQuery({
     queryKey: ['profile'],
     queryFn: getProfile
   })
 
-  const { data: managedRestaurantData } = useQuery({
+  const { data: managedRestaurantData, isLoading: isLoading_ManagedRestaurant } = useQuery({
     queryKey: ['managed-restaurant'],
     queryFn: getManagedRestaurant
   })
@@ -28,17 +29,26 @@ export function AccountMenu() {
     <DropdownMenu>
     <DropdownMenuTrigger asChild>
       <Button variant='outline' className='flex items-center gap-2 select-none'>
-        {managedRestaurantData?.name}
+        {isLoading_ManagedRestaurant ? <Skeleton className='h-4 w-40'/> : managedRestaurantData?.name}
         <ChevronDown className='h-4 w-4'/>
       </Button>
     </DropdownMenuTrigger>
 
     <DropdownMenuContent align='end' className='w-56'>
       <DropdownMenuLabel className='flex flex-col'>
-        <span>{profileData?.name}</span>
-        <span className='text-xm font-normal text-muted-foreground'>
-          {profileData?.email}
-        </span>
+        {
+          isLoading_ProfileData ?
+          <div className='space-y-1.5'>
+            <Skeleton className='h-4 w-40 mb-3'/>
+            <Skeleton className='h-4 w-40'/>
+          </div> :
+          <>
+            <span>{profileData?.name}</span>
+            <span className='text-xm font-normal text-muted-foreground'>
+              {profileData?.email}
+            </span>
+          </>
+        }
       </DropdownMenuLabel>
       <DropdownMenuSeparator />
       <DropdownMenuItem>

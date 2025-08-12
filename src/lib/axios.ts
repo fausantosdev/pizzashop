@@ -10,4 +10,11 @@ const axiosInstance = axios.create({
   timeout: 10000, // Set a timeout of 10 seconds
 })
 
+if(env.data?.VITE_ENABLE_API_DELAY){
+  axiosInstance.interceptors.request.use(async (config) => {
+    await new Promise(resolve => setTimeout(resolve, 2000))
+    return config
+  })
+}
+
 export { axiosInstance }
