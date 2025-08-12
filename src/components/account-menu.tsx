@@ -13,7 +13,7 @@ export function AccountMenu() {
     <DropdownMenu>
     <DropdownMenuTrigger asChild>
       <Button variant='outline' className='flex items-center gap-2 select-none'>
-        Pizaz Shop
+        Pizza Shop
         <ChevronDown className='h-4 w-4'/>
       </Button>
     </DropdownMenuTrigger>
